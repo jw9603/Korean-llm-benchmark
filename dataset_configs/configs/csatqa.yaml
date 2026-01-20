@@ -1,0 +1,34 @@
+name: csatqa
+dataset_path: HAERAE-HUB/csatqa
+output_type: multiple_choice
+split: test
+dataset_config: full  # 전체 데이터 (GR, LI, RCH, RCS, RCSS, WR 포함)
+
+# Prompt template (Jinja2)
+prompt_template: |
+  다음을 읽고 정답으로 알맞은 것을 고르시요.
+  ### Context: {{context}}
+  ### Question: {{question}}
+  ### Options:
+  (1) {{option1}}
+  (2) {{option2}}
+  (3) {{option3}}
+  (4) {{option4}}
+  (5) {{option5}}
+  ### Answer: 주어진 문제의 정답은
+
+choices: ["(1)", "(2)", "(3)", "(4)", "(5)"]
+
+# Field mappings from dataset
+field_mapping:
+  context: context
+  question: question
+  option1: "option#1"
+  option2: "option#2"
+  option3: "option#3"
+  option4: "option#4"
+  option5: "option#5"
+  gold: gold
+  gold_offset: -1  # Convert 1-indexed to 0-indexed
+
+metric: accuracy

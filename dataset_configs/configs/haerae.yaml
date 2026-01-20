@@ -1,0 +1,30 @@
+name: haerae
+dataset_path: HAERAE-HUB/HAE_RAE_BENCH
+output_type: multiple_choice
+split: test
+
+# lm-evaluation과 동일한 subset 이름 사용
+subsets:
+  - general_knowledge
+  - history
+  - loan_words
+  - rare_words
+  - reading_comprehension
+  - standard_nomenclature
+
+# lm-evaluation과 동일: query만 사용, 선택지는 doc_to_choice로 처리
+prompt_template: "{{query}}"
+
+choices: ["(A)", "(B)", "(C)", "(D)", "(E)"]
+
+field_mapping:
+  query: query
+  gold: answer  # "(A)", "(B)" 등 문자열
+
+# answer가 "(A)", "(B)" 형식이므로 string_choice로 인덱스 변환
+answer_type: string_choice
+
+metric: accuracy
+
+generation_kwargs:
+  max_tokens: 4000

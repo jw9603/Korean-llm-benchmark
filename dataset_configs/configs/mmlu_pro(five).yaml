@@ -1,0 +1,64 @@
+name: mmlu_pro(five)
+dataset_path: TIGER-Lab/MMLU-Pro
+output_type: generate_until
+split: test
+
+# 14 subjects: biology, business, chemistry, computer_science, economics,
+# engineering, health, history, law, math, other, philosophy, physics, psychology
+
+# Few-shot settings (same as lm-evaluation-harness)
+num_fewshot: 5
+fewshot_split: validation
+
+# Template for few-shot examples (with CoT answer)
+fewshot_template: |
+  Question:
+  {{question}}
+  Options:
+  {% for i in range(options|length) %}
+  {{ ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'][i] }}. {{options[i]}}
+  {% endfor %}
+  {{cot_content | replace("A: Let's think step by step.", "Answer: Let's think step by step.")}}
+
+# Template for test questions (without answer)
+prompt_template: |
+  Question:
+  {{question}}
+  Options:
+  {% for i in range(options|length) %}
+  {{ ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'][i] }}. {{options[i]}}
+  {% endfor %}
+  Answer: Let's think step by step.
+
+choices:
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+  - H
+  - I
+  - J
+
+field_mapping:
+  question: question
+  options: options
+  cot_content: cot_content
+  gold: answer  # "A", "B", ..., "J"
+
+# CoT answer extraction pattern: "the answer is (X)"
+answer_extraction: cot
+answer_pattern: 'answer is \(?([ABCDEFGHIJ])\)?'
+
+generation_kwargs:
+  max_tokens: 4096
+  temperature: 0
+  stop:
+    - "Question:"
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false
+
+metric: exact_match

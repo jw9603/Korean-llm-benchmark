@@ -1,0 +1,36 @@
+name: kormedmcqa
+dataset_path: sean0042/KorMedMCQA
+output_type: multiple_choice
+split: test
+
+subsets:
+  - doctor
+  - nurse
+  - pharm
+  - dentist
+
+prompt_template: |
+  {{question}}
+  A. {{A}}
+  B. {{B}}
+  C. {{C}}
+  D. {{D}}
+  E. {{E}}
+  정답：
+
+choices: ["A", "B", "C", "D", "E"]
+
+field_mapping:
+  question: question
+  A: A
+  B: B
+  C: C
+  D: D
+  E: E
+  gold: answer
+  gold_offset: -1  # Convert 1-indexed to 0-indexed
+
+metric: accuracy
+
+generation_kwargs:
+  max_tokens: 4000

@@ -1,0 +1,48 @@
+name: ko_musr_ta
+dataset_path: thunder-research-group/SNU_Ko-MuSR
+output_type: generate_until
+split: test
+
+# Team Allocation (TA): 팀 배정 최적화
+dataset_config: team_allocation
+
+# 프롬프트 템플릿 (CoT + Hint, lm-evaluation과 동일)
+prompt_template: |
+  {{narrative}}
+
+  {{question}}
+
+  스토리를 통해 각 사람이 한 가지 업무에 얼마나 능숙한지를 파악할 수 있습니다. 일반적으로 각 사람은 어떤 작업에 대해 뛰어나거나, 보통이거나, 부족한 실력을 가지고 있습니다. 우리는 가능한 한 각자의 강점을 최대한 발휘할 수 있도록 사람을 적절한 업무에 배치하려고 합니다.
+
+  또한, 두 사람이 함께 맡아야 하는 업무가 하나 있으며, 이 경우 두 사람의 팀워크 수준(훌륭함, 보통, 나쁨)도 전체 업무 성과에 중요한 영향을 미칩니다.
+
+  단, 두 사람이 함께 일해야 하는 작업에서 한 사람이 실력이 부족하고, 두 사람의 팀워크도 좋지 않다면, 다른 한 사람이 아무리 뛰어나도 전체 결과에는 도움이 되지 않을 수 있습니다.
+
+  각기 다른 강점, 약점, 그리고 두 사람 간의 상호작용을 고려하여, 전체 과제가 가장 효율적으로 수행될 수 있도록 팀원들을 적절히 배치해야 합니다.
+
+  다음 선택지 중 하나를 고르세요:
+  {% for choice in choices %}
+  {{loop.index}} - {{choice}}
+  {% endfor %}
+
+  당신은 세 가지 중 하나의 선택지를 골라야 합니다. 당신의 풀이 과정을 단계별로 설명한 뒤, 마지막에는 아래 형식으로 답변을 마무리해 주세요: "정답: (당신의 선택, 번호 포함)"
+
+field_mapping:
+  narrative: narrative
+  question: question
+  choices: choices
+  gold: answer
+
+generation_kwargs:
+  max_tokens: 2048
+  temperature: 0
+  stop:
+    - "Q:"
+    - "</s>"
+    - "<|end_of_text|>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+
+answer_type: ko_musr
+metric: accuracy
+num_fewshot: 3
