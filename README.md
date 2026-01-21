@@ -289,7 +289,6 @@ K-EXAONE 모델은 Friendly AI serverless API를 통해 지원되나, 너무 느
 
 - [ ] [Ko-IFEval](https://huggingface.co/datasets/allganize/IFEval-Ko) 데이터셋 추가하기
 - [ ] [KBL](https://huggingface.co/datasets/lbox/kbl) 데이터셋 추가하기
-- [x] [KorMedMCQA](https://huggingface.co/datasets/sean0042/KorMedMCQA) 데이터셋 추가하기
 
 
 ## References
