@@ -1,0 +1,75 @@
+name: kmmlu
+dataset_path: HAERAE-HUB/KMMLU
+output_type: multiple_choice
+split: test
+
+subsets:
+  - Accounting
+  - Agricultural-Sciences
+  - Aviation-Engineering-and-Maintenance
+  - Biology
+  - Chemical-Engineering
+  - Chemistry
+  - Civil-Engineering
+  - Computer-Science
+  - Construction
+  - Criminal-Law
+  - Ecology
+  - Economics
+  - Education
+  - Electrical-Engineering
+  - Electronics-Engineering
+  - Energy-Management
+  - Environmental-Science
+  - Fashion
+  - Food-Processing
+  - Gas-Technology-and-Engineering
+  - Geomatics
+  - Health
+  - Industrial-Engineer
+  - Information-Technology
+  - Interior-Architecture-and-Design
+  - Korean-History
+  - Law
+  - Machine-Design-and-Manufacturing
+  - Management
+  - Maritime-Engineering
+  - Marketing
+  - Materials-Engineering
+  - Math
+  - Mechanical-Engineering
+  - Nondestructive-Testing
+  - Patent
+  - Political-Science-and-Sociology
+  - Psychology
+  - Public-Safety
+  - Railway-and-Automotive-Engineering
+  - Real-Estate
+  - Refrigerating-Machinery
+  - Social-Welfare
+  - Taxation
+  - Telecommunications-and-Wireless-Technology
+
+prompt_template: |
+  {{question}}
+  A. {{A}}
+  B. {{B}}
+  C. {{C}}
+  D. {{D}}
+  정답：
+
+choices: ["A", "B", "C", "D"]
+
+field_mapping:
+  question: question
+  A: A
+  B: B
+  C: C
+  D: D
+  gold: answer
+  gold_offset: -1  # Convert 1-indexed to 0-indexed
+
+metric: accuracy
+
+generation_kwargs:
+  max_tokens: 4000

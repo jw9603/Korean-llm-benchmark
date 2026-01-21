@@ -1,0 +1,45 @@
+name: ko_musr_mm
+dataset_path: thunder-research-group/SNU_Ko-MuSR
+output_type: generate_until
+split: test
+
+# Murder Mystery (MM): 살인 미스터리 - 동기/수단/기회 추론
+dataset_config: murder_mysteries
+
+# 프롬프트 템플릿 (CoT + Hint, lm-evaluation과 동일)
+prompt_template: |
+  {{narrative}}
+
+  {{question}}
+
+  살인자는 반드시 세 가지 조건을 충족해야 합니다:
+  동기(피해자를 죽일 만한 이유가 있는가), 수단(범행 도구에 접근할 수 있는가), 기회(범행 현장에 접근할 수 있었는가)
+  무고한 용의자는 이 세 가지 중 두 가지까지만 입증될 수 있으며, 의심스러운 행동을 보일 수는 있어도 세 가지 조건을 모두 갖추지는 않습니다. 만약 두 용의자 모두 수단, 동기, 기회를 가진 것처럼 보인다면, 그 중에서도 가장 명확하게 이 세 가지가 드러난 인물을 선택해야 합니다. 반대로, 어느 누구도 세 가지를 모두 갖추지 않은 경우라면, 세 가지 조건 중 가장 뚜렷하게 드러난 인물을 선택해야 합니다.
+
+  다음 선택지 중 하나를 고르세요:
+  {% for choice in choices %}
+  {{loop.index}} - {{choice}}
+  {% endfor %}
+
+  반드시 하나의 선택지만 고르셔야 합니다. 선택하기 전에, 단계별로 당신의 추론 과정을 설명하세요.
+  단계별로 논리적인 추론을 마친 후, 마지막에 아래와 같은 형식으로 정답을 작성하세요: '정답: X'
+
+field_mapping:
+  narrative: narrative
+  question: question
+  choices: choices
+  gold: answer
+
+generation_kwargs:
+  max_tokens: 2048
+  temperature: 0
+  stop:
+    - "Q:"
+    - "</s>"
+    - "<|end_of_text|>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+
+answer_type: ko_musr
+metric: accuracy
+num_fewshot: 3

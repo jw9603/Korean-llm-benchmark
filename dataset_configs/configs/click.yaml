@@ -1,0 +1,36 @@
+name: click
+dataset_path: EunsuKim/CLIcK
+output_type: multiple_choice
+split: train
+
+# lm-evaluation과 동일한 프롬프트 (조건부 지시문 포함)
+# paragraph가 있으면 맥락 포함, 없으면 질문만
+prompt_template: |
+  {% if paragraph %}주어진 맥락을 천천히 읽고, 질문에 대한 적절한 정답을 A, B, C, D 중에 골라 알파벳 하나로 답하시오.
+
+  맥락: {{paragraph}}
+  질문: {{question}}
+  보기:
+  A:{{choices[0]}}, B: {{choices[1]}}, C: {{choices[2]}}, D: {{choices[3]}}
+  정답:{% else %}주어진 질문을 천천히 읽고, 적절한 정답을 A, B, C, D 중에 골라 알파벳 하나로 답하시오.
+
+  질문: {{question}}
+  보기:
+  A:{{choices[0]}}, B: {{choices[1]}}, C: {{choices[2]}}, D: {{choices[3]}}
+  정답:{% endif %}
+
+# lm-evaluation과 동일: A, B, C, D 선택지
+choices: ["A", "B", "C", "D"]
+
+field_mapping:
+  paragraph: paragraph
+  question: question
+  choices: choices
+  gold: answer  # answer is the exact text of correct choice
+
+answer_type: text_match  # Match answer text to choices index
+
+metric: accuracy
+
+generation_kwargs:
+  max_tokens: 4000

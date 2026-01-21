@@ -1,0 +1,33 @@
+name: hrm8k
+dataset_path: HAERAE-HUB/HRM8K
+output_type: generate_until
+split: test
+
+subsets:
+  - GSM8K
+  - KSM
+  - MATH
+  - OMNI_MATH
+  # MMMLU는 별도 설정 (hrm8k_mmmlu.yaml)
+
+prompt_template: |
+  주어진 문제를 풀어보세요.
+  문제를 푼 후, 최종 답변을 다음과 같은 형식으로 작성하세요: $\boxed{N}$.
+
+  문제: {{question}}
+  답변:
+
+field_mapping:
+  question: question
+  gold: answer
+
+generation_kwargs:
+  max_tokens: 3000
+  temperature: 0
+  stop:
+    - "</s>"
+    - "<|end_of_text|>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+
+metric: exact_match

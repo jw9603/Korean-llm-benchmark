@@ -1,0 +1,29 @@
+name: hrm8k_mmmlu
+dataset_path: HAERAE-HUB/HRM8K
+output_type: generate_until
+split: test
+
+subsets:
+  - MMMLU
+
+prompt_template: |
+  주어진 문제를 풀어보세요.
+  문제를 푼 후, 주어진 선택지 (1, 2, 3, 4) 중 최종 선택지를 다음 형식으로 작성하세요: $\boxed{N}$.
+
+  문제: {{question}}
+  답변:
+
+field_mapping:
+  question: question
+  gold: answer
+
+generation_kwargs:
+  max_tokens: 3000
+  temperature: 0
+  stop:
+    - "</s>"
+    - "<|end_of_text|>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+
+metric: exact_match

@@ -1,0 +1,45 @@
+name: ko_musr_op
+dataset_path: thunder-research-group/SNU_Ko-MuSR
+output_type: generate_until
+split: test
+
+# Object Placements (OP): 물건 위치 추적
+dataset_config: object_placements
+
+# 프롬프트 템플릿 (CoT + Hint, lm-evaluation과 동일)
+prompt_template: |
+  {{narrative}}
+
+  {{question}}
+
+  이야기를 바탕으로, 우리는 특정 인물이 어떤 물건이 어디에 있다고 생각하고 있는지를 파악하려고 합니다.
+  이를 위해서는 이야기 읽으며 각 인물이 그 물건의 위치를 시점별로 어떻게 인식하고 있는지를 추적해야 합니다.
+  물건이 옮겨질 때, 인물이 그 장면을 직접 보았거나, 옮겨진 위치를 인지할 수 있는 상태였다면 그들은 물건이 옮겨진 위치를 알고 있다고 봅니다.
+  하지만 물건이 움직일 때 인물이 그 장면을 보지 못했거나 다른 일에 집중하고 있었다면, 여전히 마지막으로 본 위치에 있다고 믿게 됩니다.
+
+  다음 선택지 중 하나를 고르세요:
+  {% for choice in choices %}
+  {{loop.index}} - {{choice}}
+  {% endfor %}
+
+  반드시 하나의 보기를 선택해야 합니다. 추론 과정을 단계별로 설명한 후, 마지막에 다음 형식으로 정답을 출력하세요: '정답: X'
+
+field_mapping:
+  narrative: narrative
+  question: question
+  choices: choices
+  gold: answer
+
+generation_kwargs:
+  max_tokens: 2048
+  temperature: 0
+  stop:
+    - "Q:"
+    - "</s>"
+    - "<|end_of_text|>"
+    - "<|endoftext|>"
+    - "<|im_end|>"
+
+answer_type: ko_musr
+metric: accuracy
+num_fewshot: 3

@@ -1,0 +1,21 @@
+name: kobalt
+dataset_path: snunlp/KoBALT-700
+dataset_config: kobalt_v1
+output_type: multiple_choice
+split: raw
+
+prompt_template: |
+  {{Question}}
+
+choices: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+
+field_mapping:
+  Question: Question
+  gold: Answer  # "A", "B", ..., "J"
+
+answer_type: string_choice
+
+metric: accuracy
+
+generation_kwargs:
+  max_tokens: 4000

@@ -1,0 +1,23 @@
+name: kmmlu_pro
+dataset_path: LGAI-EXAONE/KMMLU-Pro
+output_type: multiple_choice
+split: test
+
+prompt_template: |
+  {{question}}
+  {% for option in options %}
+  {{loop.index}}. {{option}}
+  {% endfor %}
+  정답:
+
+choices: null  # Dynamic - will be set from data (5 options)
+
+field_mapping:
+  question: question
+  options: options
+  choices: options  # Dynamic choices from data
+  gold: solution  # "1", "2", "3", "4", "5" as string
+
+answer_type: number_string  # solution is "1", "2", etc.
+
+metric: accuracy

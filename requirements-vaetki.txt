@@ -1,0 +1,26 @@
+# LLM Evaluation - VAETKI 환경용
+# VAETKI MoE 모델 평가를 위한 별도 환경
+#
+# 설치:
+#   conda create -n vaetki python=3.11
+#   conda activate vaetki
+#   pip install -r requirements-vaetki.txt
+#
+# VAETKI 플러그인 설치 (별도로 실행 필요):
+#   git clone --depth 1 --branch dev https://github.com/cyr0930/Megatron-LM-wbl.git
+#   PYTHONPATH="$PWD/Megatron-LM-wbl/vllm_plugin" pip install Megatron-LM-wbl/vllm_plugin
+#   rm -rf Megatron-LM-wbl
+
+# vLLM (VAETKI 플러그인 호환 버전)
+vllm==0.11.2
+
+# Data handling
+datasets>=3.0.0
+huggingface-hub>=0.20.0
+numpy>=1.24.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.60.0
+jinja2>=3.0.0
+pyyaml>=6.0.0
