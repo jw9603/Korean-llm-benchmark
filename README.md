@@ -4,26 +4,7 @@
 
 ## Updates
 
-- **2026-01-20**: 코드 리팩토링 - 공통 모듈(`core.py`) 분리, 중복 코드 제거
-- **2026-01-16**: CoT 정답 추출 개선 - 다양한 답변 형식 지원 (Final Answer, 정답 등)
-- **2026-01-15**: kanana-2-30b-a3b-thinking-2601 모델 평가 완료
-- **2026-01-14**: MMLU-Pro 벤치마크 추가 (영어, 0-shot/5-shot CoT)
-- **2026-01-13**: openai/gpt-oss-120b 모델 평가 완료
-- **2026-01-09**: [VAETKI-20B-A2B](https://huggingface.co/nc-ai-consortium/VAETKI-20B-A2B) 모델 평가 완료, LotteGPT 평가 진행중(API 엔드)
-- **2026-01-08**: KorMedMCQA 데이터셋 추가 (한국 의료 면허시험, 4개 서브셋)
-- **2026-01-08**: `datasets` → `dataset_configs` 폴더명 변경 (HuggingFace datasets 라이브러리 충돌 해결)
-- **2026-01-08**: 스크립트 실행 위치 통일 (`llm_evaluation/` 안에서 실행)
-- **2026-01-08**: VAETKI MoE 모델 지원을 위한 별도 환경 설정 추가 (`requirements-vaetki.txt`)
-- **2026-01-07**: KorMedMCQA 데이터셋 추가 (한국 의료 면허시험, 4개 서브셋)
-- **2026-01-07**: OpenAI Chat API 백엔드 추가 (GPT-4o 등 지원)
-- **2026-01-06**: 리더보드 자동 생성 기능 추가
-
-<details>
-<summary>click for more news</summary>
-
-- **2026-01-05**: Ko-MuSR 데이터셋 추가 (다단계 추론)
-- **2026-01-04**: HRM8K 수학 벤치마크 추가
-- **2026-01-03**: 초기 버전 릴리즈
+- **2026-01-21**: Open Korean Benchmark evaluation
 
 </details>
 
