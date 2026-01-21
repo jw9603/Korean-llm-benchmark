@@ -266,7 +266,6 @@ llm_evaluation/results/
 | OpenAI Completions API | ✅ 완료 |
 | OpenAI Chat API | ✅ 완료 |
 | K-EXAONE 지원 | ⏸️ 잠정 중단 |
-| Streamlit 대시보드 | 🚧 미완성 |
 
 ### 참고: skt/A.X-3.1 테스트 환경
 
